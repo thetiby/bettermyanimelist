@@ -1,0 +1,30 @@
+#mediaPlayer .mediaWrapper video {   
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height:100%;
+    width: 100%;
+}
+#mediaPlayer .mediaWrapper video::-webkit-media-controls-panel {
+    display:flex!important;
+    position:absolute;
+    left:0;
+    bottom:2px;
+    width:100%;
+    background: transparent;
+}
+#mediaPlayer .mediaWrapper video.nocontrols::-webkit-media-controls-panel {
+    display:none!important;
+
+}
+#mediaPlayer .mediaWrapper video.nocontrols {
+    cursor: none;
+}
+#mediaPlayer .mediaWrapper .loading_screen {    
+    background-size: 100%;
+    background:black url(chrome-extension://__MSG_@@extension_id__/resources/images/loading-screen.gif);
+}
+#mediaPlayer .mediaWrapper .error_screen  {   
+    background:black url(chrome-extension://__MSG_@@extension_id__/resources/images/error-screen.gif);
+}

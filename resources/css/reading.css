@@ -1,0 +1,18 @@
+#mediaPlayer .mediaWrapper img {
+    max-width: 100%; 
+    margin: 0 auto;
+    display: block;
+}
+#mediaPlayer .mediaWrapper .error_screen  {   
+    background:black url(chrome-extension://__MSG_@@extension_id__/resources/images/error-screen.gif);
+}
+#mediaPlayer .mediaWrapper .loading_screen {    
+/*    background-image:url(chrome-extension://__MSG_@@extension_id__/resources/images/loading-screen-reading.gif);
+    background-size: 20%;*/
+}
+#mediaPlayer img[data-cursor="left"] {
+    cursor:url(chrome-extension://__MSG_@@extension_id__/resources/images/cursor-left.png), auto;
+}
+#mediaPlayer img[data-cursor="right"] {
+    cursor:url(chrome-extension://__MSG_@@extension_id__/resources/images/cursor-right.png), auto;
+}
