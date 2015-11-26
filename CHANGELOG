@@ -1,0 +1,205 @@
+v1.0
+=======
+ General:
+   * Adds an autocomplete system for the main search bar
+
+v1.1
+=======
+ Autocomplete:
+   * Speed greatly improved
+
+v1.2
+=======
+ General:
+   * Adds the ability to hide/ignore forums
+
+v1.3
+=======
+ General:
+   * Adds the ability to export other people's list
+
+v1.4
+=======
+ General:
+   * [BETA] Adds a streaming system (see the new 'watching' button)
+
+v1.4.2
+=======
+ General:
+   * Change the streaming button name from "watching" to "streaming" (disambiguation)
+
+v1.4.3
+=======
+ General:
+   * Fixes various bugs
+
+v1.4.4
+=======
+ List:
+   * Adds the "watching" state for the export list feature
+   * Adds the ability to clean the whole anime/manga list (see on your anime list page)
+
+v1.5
+=======
+ Streaming:
+   * Fixes various bugs
+
+v1.5.1
+=======
+ General:
+   * New icon
+ Streaming:
+   * Fixes various bugs
+   * Adds a new select box allowing to choose a source (In-Progress)
+
+v1.5.2
+=======
+ General:
+   * Removes the ability of hiding a forum
+   * Fixes various bugs
+
+v1.5.3
+=======
+ List:
+   * Adds a feature to instantly search by typing on the list
+   Manga:
+     * Fixes an important bug preventing the export
+ Streaming: 
+   * Sources using Clouflare no longer need to open a new window to bypass it
+
+v1.5.4
+=======
+ General:
+   * Fixes various bugs
+ Streaming:  
+   * Stability and speed improved
+
+v1.5.5
+=======
+ General: 
+   * A new icon is displayed inside the omnibox if BetterMyAnimeList is enabled
+
+v1.5.6
+=======
+ Autocomplete: 
+   * The special characters are replaced by a wildcard which makes the searches more efficient
+ List:
+   * A new confirmation popup shows up when you try to clear the list
+ Streaming:
+   * Adds shortcuts to the video player
+   Source:
+      * [Beta] Adds various sources
+
+v1.5.7
+=======
+ General:
+   * [Beta] Adds a reading system (see reading tab on a manga page)
+ Streaming: 
+   * Layout update
+
+v1.5.7.1
+=======
+ General:
+   * Fixes various bugs
+
+v1.5.7.2
+=======
+ General:
+   * Fixes various bugs
+   * A new popup shows up when you use the export list system
+
+v2.0
+=======
+ Streaming/Reading:  
+   * Layout update
+ Streaming:
+   Source:
+     * Adds kissmanga.com
+     * Adds watchhentaistream.com
+ General:
+   * Adds a BBCode system
+   * Fixes various bugs
+
+v2.1 
+ General:
+   * Fixes various bugs
+
+v2.2
+=======
+ Streaming/Reading:    
+   * Layout update
+ Streaming:
+   Source:
+     * Removes watchhentaistream.com 
+     * Adds hentaimama.com
+     * Adds animegaki.com
+ Reading:
+   Source:
+     * Adds mangahere.co
+     * Adds es.mangahere.co
+ BBCode Toolbar:
+   * Increases the size of the BBCode buttons to make them easier to click on
+   * Fixes minor bugs
+
+v2.2.1
+=======
+ Streaming:
+   * Fixes the controls bar
+   * The playback quality is now saved 
+   * Fixes minor bugs
+
+v2.2.4
+=======
+ Streaming:
+   * Playback is now saved (both the episode and the current position in the video) and automatically resumed
+ Reading:
+   * Chapters as well as the last read page is now saved and automatically resumed
+
+v2.2.5
+=======
+ General:
+   * Fixes various bugs
+
+v2.2.6
+=======
+ Autocomplete:
+   * Redirects to the first result if it is the only one
+
+v2.2.7
+=======
+ General:
+   * Fixes various bugs
+
+v2.2.8
+=======
+ General:
+   * Fixes various bugs
+
+v2.2.9
+=======
+ General:
+   * Fixes various bugs
+
+v3.0.0
+=======
+ General:
+   * Removes the ability to export other people's list
+   * Removes the ability to clear the list
+
+v3.3.5
+=======
+ BBCode toolbar: 
+   * Fixes various bugs
+   * Changes the layout
+ Source:
+   * Sorts sources inside the select source
+ Streaming/Reading:
+   * History has been removed and will be reintroduced in the remade version 
+
+v3.3.6
+=======
+ General:
+   * Renames the project on the Chrome Webstore Page from BetterMyAnimeList (dev) to BetterMyAnimeList    
+
+v3.3.7
+=======

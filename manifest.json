@@ -1,0 +1,117 @@
+{
+  "background": {
+    "scripts": [
+      "reload.js",
+      "background.js",
+      "retroCompatibility.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "resources/lib/font-awesome.min.css",
+        "resources/lib/animate.min.css",
+        "resources/css/global.css",
+        "resources/css/bbcode.css"
+      ],
+      "js": [
+        "resources/lib/analytics.min.js",
+        "src/storage.js",
+        "src/constants.js",
+        "src/tools.js",
+        "src/user.js",
+        "src/bbcode.js"
+      ],
+      "matches": [
+        "*://*.myanimelist.net/*"
+      ]
+    },
+    {
+      "css": [
+        "resources/css/autocompletion.css"
+      ],
+      "exclude_matches": [
+        "*://*.myanimelist.net/animelist/*",
+        "*://*.myanimelist.net/mangalist/*"
+      ],
+      "js": [
+        "src/autocompletion.js"
+      ],
+      "matches": [
+        "*://*.myanimelist.net/*"
+      ]
+    },
+    {
+      "css": [
+        "resources/css/streaming.css"
+      ],
+      "js": [
+        "src/streaming.js"
+      ],
+      "matches": [
+        "*://*.myanimelist.net/anime/*",
+        "*://*.myanimelist.net/anime.php?id=*"
+      ]
+    },
+    {
+      "css": [
+        "resources/css/reading.css"
+      ],
+      "js": [
+        "src/reading.js"
+      ],
+      "matches": [
+        "*://*.myanimelist.net/manga/*",
+        "*://*.myanimelist.net/manga.php?id=*"
+      ]
+    },
+    {
+      "css": [
+        "resources/css/mediaplayer.css"
+      ],
+      "js": [
+        "resources/lib/sources.js",
+        "src/media.js",
+        "src/mediaPlayer.js",
+        "src/titlesMatcher.js",
+        "src/sourcesTrie.js",
+        "src/sources.js"
+      ],
+      "matches": [
+        "*://*.myanimelist.net/anime/*",
+        "*://*.myanimelist.net/anime.php?id=*",
+        "*://*.myanimelist.net/manga/*",
+        "*://*.myanimelist.net/manga.php?id=*"
+      ]
+    }
+  ],
+  "description": "Watch anime and read manga from MyAnimeList.net",
+  "icons": {
+    "16": "resources/images/icon32.png",
+    "48": "resources/images/icon128.png",
+    "128": "resources/images/icon128.png"
+  },
+  "manifest_version": 2,
+  "minimum_chrome_version": "37.0.2062.124",
+  "name": "BetterMyAnimeList",
+  "page_action": {
+    "default_icon": {
+      "19": "resources/images/icon32.png",
+      "38": "resources/images/icon128.png"
+    },
+    "default_title": "Powered by BetterMyAnimeList"
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "notifications",
+    "storage",
+    "tabs",
+    "<all_urls>",
+    "unlimitedStorage"
+  ],
+  "version": "0.2.3.7",
+  "web_accessible_resources": [
+    "resources/**/*"
+  ]
+}

@@ -1,0 +1,27 @@
+#bbCodeToolbarWrapper {
+  display: table;
+}
+
+#bbCodeToolbarWrapper .buttonsWrapper {
+    background-color: hsl(222, 48%, 49%);
+    padding: 5px;
+    border: 1px solid rgb(216, 216, 216);
+    border-bottom: 3px solid rgb(216, 216, 216);
+}
+
+#bbCodeToolbarWrapper button {
+    outline:none;
+    position:relative;
+    padding: 4px;
+    font-size:15px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#bbCodeToolbarWrapper button i {
+    line-height:0;
+}

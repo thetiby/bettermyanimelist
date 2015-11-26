@@ -1,0 +1,1 @@
+README available on the repository of the remade version at [github.com/rebesle/bettermyanimelist](https://github.com/rebesle/bettermyanimelist)

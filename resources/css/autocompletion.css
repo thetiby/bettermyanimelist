@@ -1,0 +1,160 @@
+.results {
+    position:absolute;
+    background-color:white;
+    z-index: 999;
+    border: solid #ebebeb;
+    border-width:0px 0px 1px 1px; 
+    max-height:500px;
+    min-height:70px;
+    min-width:346px;
+    max-width:346px;
+    top:100%;
+    right: 0px;
+    box-shadow: 0px 1px 1px #bebebe;
+    display:none;
+    overflow:auto;
+    text-align:center;
+}
+
+.results .loader {
+    display: inline-block;
+    text-align:center;
+    width:32px;
+    height:32px;
+    background-image: url(chrome-extension://__MSG_@@extension_id__/resources/images/loading-spinner.gif);
+    background-repeat:no-repeat;
+}
+
+.results .message {
+    line-height:75px;
+    color:black;
+}
+
+.results > .nano-pane > .nano-slider {
+    background: rgba(46,81,162,.9);
+}
+
+.results > .nano-pane {
+    background : rgba(46,81,162,.25);
+}
+
+.results .entry {    
+    overflow: auto;
+    text-align:left; 
+    max-width:98.5%;
+    min-width:98.5%;
+    padding: 5px 0px 5px 5px;
+    background-color:#f6f6f6;
+}
+
+.results .entry:not(:last-child) {    
+    border: solid #bebebe;
+    border-width: 0px 0px 1px 0px;
+}
+
+.results .entry .top {
+    width:100%;
+}
+
+.results .entry a {
+    position:relative;
+}
+
+.results .entry .thumbnail {
+    position:relative;
+    width:45px;
+    display:block;
+    border: 1px solid #bebebe;
+    padding: 1px;
+    float:left;
+    margin:0px 5px 0px 0px; 
+}
+
+.results .entry .thumbnail img:first-child {
+    position:relative;
+    z-index:100;
+    width: 100%;
+}
+
+.results .entry .thumbnail .watch {
+    display:none;
+    position:absolute;
+    z-index:101;
+    width: 96%;
+    top: 1px;
+    height: 97%;
+    background-color:rgba(0,0,0,0.2);
+}
+
+.results .entry .thumbnail .watch img {
+    position:absolute;
+    top:0;
+    bottom:0;
+    margin:auto;
+}
+
+.results .entry .thumbnail:hover .watch {    
+    display:block;
+}
+.results .entry img.thumbnail:after { 
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.results .entry .title {
+    margin-right:2px;
+}
+
+.results .entry .title + small {
+    font-size:8px;
+}
+
+.results .entry .title, .results .entry .synopsis {
+    word-wrap: break-word;
+    font-size:10px;
+}
+
+.results .entry .button_add,
+.results .entry .button_edit
+{
+    float:right;
+}
+
+.results .entry .synopsis a {    
+    word-break: normal!important; 
+}
+
+.results .entry .synopsis {
+    max-width:98%;
+}
+
+.results .entry .synopsis, .results .entry .informations {        
+    margin-top:4px;
+    line-height:11.5px;
+    text-align:left;
+    color:black;    
+}
+
+.results .informations {
+    font-size: 9px;
+    background: #E3E3E3;
+}
+
+#menu_right {
+    position: relative;
+}
+#searchBar {
+    position: relative;
+    z-index: 101;
+}
+.results + .cloak {
+    display:none;
+    position: fixed;    
+    left:0;
+    top:0;
+    z-index: 100;
+    width:100%;
+    height:100%;
+    background-color: rgba(255,255,255,0.5);
+}

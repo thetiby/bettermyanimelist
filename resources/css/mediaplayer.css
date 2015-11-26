@@ -1,0 +1,87 @@
+#mediaPlayer * {
+    outline:none;
+}
+#mediaPlayer .cloak {
+    display:none;
+    background: black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 102;
+    opacity: 0.95;
+    zoom:1;
+}
+#mediaPlayer .sourceControls {
+    width:100%;
+    text-align:right;
+}
+#mediaPlayer .sourceControls option.already {
+    color:#B5B5B5;
+}
+#mediaPlayer .sourceControls select:first-of-type {
+    min-width:20%;
+    max-width:20%;
+}
+#mediaPlayer .sourceControls select:nth-of-type(2) {
+    min-width:37%;
+    max-width:37%;
+}
+#mediaPlayer .sourceControls select:last-of-type {
+    min-width:12%;
+    max-width:12%;
+    text-align:right;
+}
+
+#mediaPlayer .mediaWrapper {
+    margin-top:5px;
+    position: relative;    
+    margin-bottom: 5px;
+    min-height: 515px;
+    height: 515px;
+    padding: 1px;
+    border: 1px solid #bebebe;
+    background-color: black;
+}
+#mediaPlayer .mediaWrapper.interactiveMode {
+    padding: 0;
+    border: none;
+    z-index:103;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    bottom:0;
+    height: 41.5rem;
+    left: 0;
+}
+#mediaPlayer .mediaWrapper .loading_screen {    
+    position: absolute;
+    font-size: 4em;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+#mediaPlayer .mediaWrapper .error_screen  {   
+    display:none;
+    position: absolute;
+    font-size: 4em;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+}
+
+#mediaPlayer .mediaWrapper .osd {
+    display:none;
+    position: absolute;
+    font-size: 20px;
+    left: 0;
+    right: 0;
+    top: 10px;
+    color: white;
+    text-align: center;
+    animation-duration: 5s;
+}
