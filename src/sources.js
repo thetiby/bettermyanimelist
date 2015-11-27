@@ -61,12 +61,19 @@ var SOURCES = {
                                         if(dub && site_defined_title.endsWith('(Sub)')) {
                                             if(title.endsWith('sub')) {
                                                 mediaPlayer.source.load(title.replace(/sub$/,'dub'), callback, dub);
-                                            } else {
-                                                mediaPlayer.source.load(title.replace(/sub$/,''), callback, dub);
+                                                return;
+                                            } else if(!title.endsWith('dub')) {
+                                                mediaPlayer.source.load(title + '-dub', callback, dub);
+                                                return;
                                             }
-                                            return;
                                         } else if(!dub && site_defined_title.endsWith('(Dub)')) {
-                                            mediaPlayer.source.load(title.replace(/dub$/,'sub'), callback, dub);
+                                            if(title.endsWith('dub')) {
+                                                mediaPlayer.source.load(title.replace(/dub$/,'sub'), callback, dub);
+                                                return;
+                                            } else if(title.endsWith('sub')) {
+                                                mediaPlayer.source.load(title.replace(/sub$/,''), callback, dub);
+                                                return;
+                                            }
                                             return;   
                                         }
                                         for (var i = episodes.length; i--; ) {
@@ -77,7 +84,7 @@ var SOURCES = {
                                         }
                                     // Update title on top of the video with the current site title defined
                                     mediaPlayer.osd.textContent = site_defined_title;
-                                    mediaPlayer.source.load1(mediaPlayer.select.value);
+                                    mediaPlayer.source.load1();
                                 } else {
                                     callback();
                                 }
@@ -113,7 +120,6 @@ var SOURCES = {
                                 }
                                 mediaPlayer.select1.add(option);
                             }
-                            mediaPlayer.select.options[mediaPlayer.select.selectedIndex].select1 = mediaPlayer.select1.innerHTML;
                             mediaPlayer.injectMedia(mediaPlayer.select1.value);
                         } else {
                             mediaPlayer.setState(STATE.ERROR);
@@ -216,148 +222,154 @@ var SOURCES = {
                         xmlhttp.send();
                     }
                 }
-                ],
-                FR: [
-                ],
-                ES: []
-            },
-            DUB: {
-                EN: [
-                {
-                   id: 'ad98592b-9183-4e3a-ac5f-9516c9db6474',
-                   domain: 'kissanime.to',
-                   protocol: 'https://',
-                   matchers: [/^https?:\/\/(www\.)?kissanime\.to\/(M\/)?anime\/.*-dub$/i],
-                   urlTitleExtractors: [/anime\/([^\/]+)/i]
-            }
             ],
             FR: [
-            ]
-        }
-    },
-    1: {
-        RAW: {
+            ],
+            ES: []
         },
-        SUB: {
+        DUB: {
             EN: [
             {
-                id: "fa583cd2-555c-11e5-885d-feff819cdc9f",
-                protocol: 'http://',
-                domain: 'kissmanga.com',
-                matchers: [/^https?:\/\/(www\.)?kissmanga\.com\/manga\/.*/i],
-                urlTitleExtractors: [/manga\/([^\/]+)/i],
-                load: function (title, callback) {
-                    title = title.replace(/[^A-z0-9]/g, "-").replace(/[^A-z0-9]$/g, '').replace(/[-]+/g, "-").replace(/^-+|-+$/g, "");
-                    var xmlhttp = new XMLHttpRequest();
-                    xmlhttp.onreadystatechange = function () {
-                        if (xmlhttp.readyState == 4) {
-                            var chapters = xmlhttp.responseXML.querySelectorAll(".listing a");
-                            if (xmlhttp.status == 200 && chapters.length > 0) {
-                                mediaData.current_title = title;
-                                var site_defined_title = xmlhttp.responseXML.querySelector(".barContent a.bigChar").textContent;
-                                mediaPlayer.osd.textContent = site_defined_title;
-                                mediaPlayer.source.load1(chapters[chapters.length - 1].href.match(/\/manga\/[^\/]+\/([^?]+\?id=[0-9]+)$/i)[1]);
-                            } else {
-                                callback();
-                            }
-                        }
-                    };
-                    xmlhttp.open("GET", this.protocol + this.domain + "/Manga/" + title, true);
-                    xmlhttp.responseType = "document";
-                    xmlhttp.send();
-                },
-                load1: function (uri) {
-                    var xmlhttp = new XMLHttpRequest();
-                    xmlhttp.onreadystatechange = function () {
-                        if (xmlhttp.readyState == 4) {
-                            if (xmlhttp.status == 200) {
-                                if (mediaPlayer.select.options.length == 0) {
-                                    mediaPlayer.select.innerHTML = (xmlhttp.responseXML.querySelector(".selectChapter") || xmlhttp.responseXML.querySelector("#selectChapter")).innerHTML;
-                                }
-                                var images1 = xmlhttp.responseXML.body.innerHTML.match(/lstImages\.push\("([^"]+)"\)/gi);
-                                var images = [];
-                                for (var i = 0; i < images1.length; i++) {
-                                    images.push(images1[i].match(/lstImages\.push\("([^"]+)"\)/i)[1]);
-                                }
-                                mediaPlayer.select1.innerHTML = "";
-                                for (var i = 0; i < images.length; i++) {
-                                    var option = document.createElement("option");
-                                    option.value = images[i];
-                                    option.text = "Page " + pad((i + 1), 2);
-                                    mediaPlayer.select1.add(option);
-                                }
-                                mediaPlayer.injectMedia(mediaPlayer.select1.value);
-                            } else {
-                                mediaPlayer.setState(STATE.ERROR);
-                            }
-                        }
-                    };
-                    xmlhttp.open("GET", this.protocol + this.domain + "/Manga/" + mediaData.current_title + "/" + (uri || mediaPlayer.select.value), true);
-                    xmlhttp.responseType = "document";
-                    xmlhttp.send();
-                }
+               id: 'ad98592b-9183-4e3a-ac5f-9516c9db6474',
+               domain: 'kissanime.to',
+               protocol: 'https://',
+               matchers: [/^https?:\/\/(www\.)?kissanime\.to\/(M\/)?anime\/.*-dub$/i],
+               urlTitleExtractors: [/anime\/([^\/]+)/i],
+               load: function(title, callback) {
+                SOURCES[0].SUB.EN[0].load(title, callback, true);
             },
-            {
-                id: "13894ab2-9189-11e5-8994-feff819cdc9f",
-                protocol: 'http://',
-                domain: 'www.mangahit.com',
-                matchers: [/^https?:\/\/(www\.)?mangahit\.com\/manga\/.*/i],
-                urlTitleExtractors: [/manga\/([^\/]+)/i],
-                load: function (title, callback) {
-                    title = title.replace(/[^A-z0-9]/g, "-").replace(/[^A-z0-9]$/g, '').replace(/[-]+/g, "-").replace(/^-+|-+$/g, "");
-                    var xmlhttp = new XMLHttpRequest();
-                    xmlhttp.onreadystatechange = function () {
-                        if (xmlhttp.readyState == 4) {
-                            var chapters = xmlhttp.responseXML.querySelectorAll(".scope.records a");
-                            if (xmlhttp.status == 200 && chapters.length > 0) {
-                                mediaData.current_title = title;
-                                var site_defined_title = xmlhttp.responseXML.querySelector("#ml_content > h1").textContent;
-                                mediaPlayer.osd.textContent = site_defined_title;
-                                mediaPlayer.source.load1(chapters[chapters.length - 1].href.match(/[^\/]+\/([0-9]+)/i)[1]);
-                            } else {
-                                callback();
-                            }
-                        }
-                    };
-                    xmlhttp.open("GET", this.protocol + this.domain + "/manga/" + title, true);
-                    xmlhttp.responseType = "document";
-                    xmlhttp.send();
-                },
-                load1: function (chapter) {
-                    var xmlhttp = new XMLHttpRequest();
-                    xmlhttp.onreadystatechange = function () {
-                        if (xmlhttp.readyState == 4) {
-                            if (xmlhttp.status == 200) {
-                                if (mediaPlayer.select.options.length == 0) {
-                                    var options = xmlhttp.responseXML.querySelector("#chapters").options;
-                                    for (var i = options.length - 1; i >= 0; i--) {
-                                        var option = document.createElement("option");
-                                        option.value = options[i].value;
-                                        option.text = options[i].text;
-                                        mediaPlayer.select.add(option);
-                                    }
-                                }
-                                var imageSrc = xmlhttp.responseXML.querySelector("#topchapter > div.chapter-viewer > a > img").src;
-                                mediaPlayer.select1.innerHTML = xmlhttp.responseXML.querySelector("#pages").innerHTML;
-                                for (var i = 0; i < mediaPlayer.select1.options.length; i++) {
-                                    mediaPlayer.select1.options[i].value = imageSrc.replace(/([0-9]+)\.jpg$/, pad(i + 1, 2) + ".jpg");
-                                }
-                                mediaPlayer.injectMedia(imageSrc);
-                            } else {
-                                mediaPlayer.setState(STATE.ERROR);
-                            }
-                        }
-                    };
-                    xmlhttp.open("GET", this.protocol + this.domain + "/" + mediaData.current_title + "/" + (chapter || mediaPlayer.select.value) + "/1", true);
-                    xmlhttp.responseType = "document";
-                    xmlhttp.send();
-                }
+            load1: function() {
+                SOURCES[0].SUB.EN[0].load1();
             }
-            ],
-            FR: [
-            ],
-            ES: [
-            ]
         }
+        ],
+        FR: [
+        ]
     }
+},
+1: {
+    RAW: {
+    },
+    SUB: {
+        EN: [
+        {
+            id: "fa583cd2-555c-11e5-885d-feff819cdc9f",
+            protocol: 'http://',
+            domain: 'kissmanga.com',
+            matchers: [/^https?:\/\/(www\.)?kissmanga\.com\/manga\/.*/i],
+            urlTitleExtractors: [/manga\/([^\/]+)/i],
+            load: function (title, callback) {
+                title = title.replace(/[^A-z0-9]/g, "-").replace(/[^A-z0-9]$/g, '').replace(/[-]+/g, "-").replace(/^-+|-+$/g, "");
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function () {
+                    if (xmlhttp.readyState == 4) {
+                        var chapters = xmlhttp.responseXML.querySelectorAll(".listing a");
+                        if (xmlhttp.status == 200 && chapters.length > 0) {
+                            mediaData.current_title = title;
+                            var site_defined_title = xmlhttp.responseXML.querySelector(".barContent a.bigChar").textContent;
+                            mediaPlayer.osd.textContent = site_defined_title;
+                            mediaPlayer.source.load1(chapters[chapters.length - 1].href.match(/\/manga\/[^\/]+\/([^?]+\?id=[0-9]+)$/i)[1]);
+                        } else {
+                            callback();
+                        }
+                    }
+                };
+                xmlhttp.open("GET", this.protocol + this.domain + "/Manga/" + title, true);
+                xmlhttp.responseType = "document";
+                xmlhttp.send();
+            },
+            load1: function (uri) {
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function () {
+                    if (xmlhttp.readyState == 4) {
+                        if (xmlhttp.status == 200) {
+                            if (mediaPlayer.select.options.length == 0) {
+                                mediaPlayer.select.innerHTML = (xmlhttp.responseXML.querySelector(".selectChapter") || xmlhttp.responseXML.querySelector("#selectChapter")).innerHTML;
+                            }
+                            var images1 = xmlhttp.responseXML.body.innerHTML.match(/lstImages\.push\("([^"]+)"\)/gi);
+                            var images = [];
+                            for (var i = 0; i < images1.length; i++) {
+                                images.push(images1[i].match(/lstImages\.push\("([^"]+)"\)/i)[1]);
+                            }
+                            mediaPlayer.select1.innerHTML = "";
+                            for (var i = 0; i < images.length; i++) {
+                                var option = document.createElement("option");
+                                option.value = images[i];
+                                option.text = "Page " + pad((i + 1), 2);
+                                mediaPlayer.select1.add(option);
+                            }
+                            mediaPlayer.injectMedia(mediaPlayer.select1.value);
+                        } else {
+                            mediaPlayer.setState(STATE.ERROR);
+                        }
+                    }
+                };
+                xmlhttp.open("GET", this.protocol + this.domain + "/Manga/" + mediaData.current_title + "/" + (uri || mediaPlayer.select.value), true);
+                xmlhttp.responseType = "document";
+                xmlhttp.send();
+            }
+        },
+        {
+            id: "13894ab2-9189-11e5-8994-feff819cdc9f",
+            protocol: 'http://',
+            domain: 'www.mangahit.com',
+            matchers: [/^https?:\/\/(www\.)?mangahit\.com\/manga\/.*/i],
+            urlTitleExtractors: [/manga\/([^\/]+)/i],
+            load: function (title, callback) {
+                title = title.replace(/[^A-z0-9]/g, "-").replace(/[^A-z0-9]$/g, '').replace(/[-]+/g, "-").replace(/^-+|-+$/g, "");
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function () {
+                    if (xmlhttp.readyState == 4) {
+                        var chapters = xmlhttp.responseXML.querySelectorAll(".scope.records a");
+                        if (xmlhttp.status == 200 && chapters.length > 0) {
+                            mediaData.current_title = title;
+                            var site_defined_title = xmlhttp.responseXML.querySelector("#ml_content > h1").textContent;
+                            mediaPlayer.osd.textContent = site_defined_title;
+                            mediaPlayer.source.load1(chapters[chapters.length - 1].href.match(/[^\/]+\/([0-9]+)/i)[1]);
+                        } else {
+                            callback();
+                        }
+                    }
+                };
+                xmlhttp.open("GET", this.protocol + this.domain + "/manga/" + title, true);
+                xmlhttp.responseType = "document";
+                xmlhttp.send();
+            },
+            load1: function (chapter) {
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function () {
+                    if (xmlhttp.readyState == 4) {
+                        if (xmlhttp.status == 200) {
+                            if (mediaPlayer.select.options.length == 0) {
+                                var options = xmlhttp.responseXML.querySelector("#chapters").options;
+                                for (var i = options.length - 1; i >= 0; i--) {
+                                    var option = document.createElement("option");
+                                    option.value = options[i].value;
+                                    option.text = options[i].text;
+                                    mediaPlayer.select.add(option);
+                                }
+                            }
+                            var imageSrc = xmlhttp.responseXML.querySelector("#topchapter > div.chapter-viewer > a > img").src;
+                            mediaPlayer.select1.innerHTML = xmlhttp.responseXML.querySelector("#pages").innerHTML;
+                            for (var i = 0; i < mediaPlayer.select1.options.length; i++) {
+                                mediaPlayer.select1.options[i].value = imageSrc.replace(/([0-9]+)\.jpg$/, pad(i + 1, 2) + ".jpg");
+                            }
+                            mediaPlayer.injectMedia(imageSrc);
+                        } else {
+                            mediaPlayer.setState(STATE.ERROR);
+                        }
+                    }
+                };
+                xmlhttp.open("GET", this.protocol + this.domain + "/" + mediaData.current_title + "/" + (chapter || mediaPlayer.select.value) + "/1", true);
+                xmlhttp.responseType = "document";
+                xmlhttp.send();
+            }
+        }
+        ],
+        FR: [
+        ],
+        ES: [
+        ]
+    }
+}
 };
