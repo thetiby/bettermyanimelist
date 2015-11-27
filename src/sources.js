@@ -42,7 +42,7 @@ var SOURCES = {
                 protocol: 'https://',
                 matchers: [/(?!.*-dub)^https?:\/\/(www\.)?kissanime\.to\/(m\/)?anime\/.*/i],
                 urlTitleExtractors: [/anime\/([^\/]+)/i],
-                load: function (title, callback) {
+                load: function (title, callback, dub) {
                     title = title.replace(/[^A-z0-9]/g, "-").replace(/[^A-z0-9]$/g, '').replace(/[-]+/g, "-").replace(/^-+|-+$/g, "");
                     var xmlhttp = new XMLHttpRequest();
                     xmlhttp.onreadystatechange = function () {
@@ -58,9 +58,15 @@ var SOURCES = {
                                     if (episodes.length > 0) {
                                         mediaData.current_title = title;
                                         var site_defined_title = xmlhttp.responseXML.querySelector("#divContentList > article > div.post-content > h2 > a").textContent;
-                                        // Dubbed animes are unwanted here
-                                        if(site_defined_title.endsWith('(Dub)') != -1) {
-                                            callback();
+                                        if(dub && site_defined_title.endsWith('(Sub)')) {
+                                            if(title.endsWith('sub')) {
+                                                mediaPlayer.source.load(title.replace(/sub$/,'dub'), callback, dub);
+                                            } else {
+                                                mediaPlayer.source.load(title.replace(/sub$/,''), callback, dub);
+                                            }
+                                            return;
+                                        } else if(!dub && site_defined_title.endsWith('(Dub)')) {
+                                            mediaPlayer.source.load(title.replace(/dub$/,'sub'), callback, dub);
                                             return;   
                                         }
                                         for (var i = episodes.length; i--; ) {
@@ -93,6 +99,10 @@ var SOURCES = {
                             var el = document.createElement('div');
                             el.innerHTML = asp.wrap(xmlhttp.responseText);
                             var links = el.querySelectorAll('a');
+                            if(links.length == 0) {                                
+                                mediaPlayer.setState(STATE.ERROR);
+                                return;
+                            }
                             mediaPlayer.select1.textContent = '';
                             for (var i = 0; i < links.length; i++) {
                                 var option = document.createElement('option');
@@ -217,16 +227,15 @@ var SOURCES = {
                    id: 'ad98592b-9183-4e3a-ac5f-9516c9db6474',
                    domain: 'kissanime.to',
                    protocol: 'https://',
-                   forceGoogle: true,
                    matchers: [/^https?:\/\/(www\.)?kissanime\.to\/(M\/)?anime\/.*-dub$/i],
                    urlTitleExtractors: [/anime\/([^\/]+)/i]
-               }
-               ],
-               FR: [
-               ]
-           }
-       },
-       1: {
+            }
+            ],
+            FR: [
+            ]
+        }
+    },
+    1: {
         RAW: {
         },
         SUB: {
