@@ -40,7 +40,7 @@ var SOURCES = {
                 id: "fa5845e2-555c-11e5-885d-feff819cdc9f",
                 domain: 'kissanime.to',
                 protocol: 'https://',
-                matchers: [/^https?:\/\/(www\.)?kissanime\.to\/(m\/)?anime\/.*/i],
+                matchers: [/(?!.*-dub)^https?:\/\/(www\.)?kissanime\.to\/(m\/)?anime\/.*/i],
                 urlTitleExtractors: [/anime\/([^\/]+)/i],
                 load: function (title, callback) {
                     title = title.replace(/[^A-z0-9]/g, "-").replace(/[^A-z0-9]$/g, '').replace(/[-]+/g, "-").replace(/^-+|-+$/g, "");
@@ -209,8 +209,7 @@ var SOURCES = {
                 ],
                 FR: [
                 ],
-                ES: [
-                ]
+                ES: []
             },
             DUB: {
                 EN: [
@@ -353,4 +352,3 @@ var SOURCES = {
         }
     }
 };
-
