@@ -207,10 +207,10 @@ var SOURCES = {
                     }
                 }
                 ],
-                FR: {
-                },
-                ES: {
-                }
+                FR: [
+                ],
+                ES: [
+                ]
             },
             DUB: {
                 EN: [
@@ -353,3 +353,4 @@ var SOURCES = {
         }
     }
 };
+
