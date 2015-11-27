@@ -233,6 +233,8 @@ function MediaPlayer() {
                     mediaPlayer.img.src = "";
                     this.img.removeAttribute('data-cursor');
                 }
+                this.select.innerHTML = "";
+                this.select1.innerHTML = "";
                 this.select_source.disabled = false;
                 this.select.disabled = true;
                 this.select1.disabled = true;
