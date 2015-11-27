@@ -200,6 +200,12 @@ v3.3.6
 =======
  General:
    * Renames the project on the Chrome Webstore Page from BetterMyAnimeList (dev) to BetterMyAnimeList    
+ Autocomplete:
+   * Added the ability to watch an anime/manga by clicking the thumbnail
 
 v3.3.7
 =======
+ Autocomplete:
+   * Improved search results
+ Streaming/Reading:
+   * Fixed various bugs   
