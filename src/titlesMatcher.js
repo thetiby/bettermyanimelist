@@ -67,7 +67,6 @@ function matchTitles1(params, index) {
         console.error('[TitlesMatcher] No titles found', params.titles[index]);
         mediaPlayer.setState(STATE.ERROR);
     } else if (index + 1 > params.titles.length && !params.google) {
-        console.warn('[TitlesMatcher] The title couldn\'t be found using the provided mediaData.', mediaData);
         params.google = true;
         matchTitles2(params, 0);
     } else if (testedTitles.indexOf(params.titles[index]) !== -1) {
@@ -76,8 +75,11 @@ function matchTitles1(params, index) {
     } else {
         setTimeout(function () {
             testedTitles.push(params.titles[index]);
-            mediaPlayer.source.load(params.titles[index], matchTitles1.bind(null, params, index + 1));
-        }, index > 0 ? 250 : 1);
+            mediaPlayer.source.load(params.titles[index], function() {                
+                console.warn('[TitlesMatcher] This title seems not to be working', params.titles[index]);
+                matchTitles1(params, index + 1);
+        });
+    }, index > 0 ? 250 : 1);
     }
 }
 
