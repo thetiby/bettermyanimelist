@@ -75,6 +75,9 @@ function initComponents() {
         preferences.playback.volume = that.video.volume;
     };
     this.video.onloadeddata = function myEvent() {
+        if(that.select1.options.length == 0) {
+            that.select1.innerHTML = '<option>'+this.videoHeight+'p</option>';
+        }
         console.log('[MediaPlayer] Video data loaded');
         console.log('---------- Video data ----------');
         console.log('Video src: ' + this.src);
