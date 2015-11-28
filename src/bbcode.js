@@ -22,13 +22,15 @@ var BUTTONS = [
 {
   icon:'fa fa-font',
   title: 'Text color',
-  param: true,
+  paramText: 'Text color (Hexadecimal):',
+  paramExtract: /(#[0-9]{3,6})/,
   tag: 'color'
 },
 {
   icon: 'fa fa-text-height',
   title:'Text size',
-  param: true,
+  paramText: 'Text size (20 to 200):',
+  paramExtract: /(^[1-9][0-9]?$|^200$)/,
   tag: 'size'
 },
 {
@@ -44,13 +46,17 @@ var BUTTONS = [
 {
   icon: 'fa fa-link',
   title:'Link',
-  param: true,
-  tag: 'url'
+  paramText: 'URL:',
+  tag: 'url',
+  paramExtract: /(https?:\/\/(www\.)?([^\.\s]{1,255}\.?){8,})/i
 },
 {
   icon: 'fa fa-picture-o',
   title:'Image',
-  tag:'img'
+  tag:'img',
+  paramAskOnly: true,
+  paramText: 'Image URL:',
+  paramExtract: /(https?:\/\/(www\.)?([^\.\s]{1,255}\.?){8,})/i
 },
 {
   icon: 'fa fa-list-ol',
@@ -75,7 +81,10 @@ var BUTTONS = [
 {
   icon: 'fa fa-youtube',
   title:'Youtube',
-  tag:'yt'
+  tag:'yt',  
+  paramAskOnly: true,
+  paramText:'Video URL:',
+  paramExtract: /watch\?v=([A-z0-9]+)/i
 }
 ];
 
@@ -87,6 +96,7 @@ var BUTTONS = [
     var toolbar = document.createElement("div");
     toolbar.id = 'bbCodeToolbarWrapper';           
     toolbar.textArea = textAreas[i];     
+    toolbar.textArea.history = [];
     /* Buttons wrapper */
     toolbar.buttonsWrapper = document.createElement('div');
     toolbar.buttonsWrapper.className = 'buttonsWrapper';
@@ -94,12 +104,18 @@ var BUTTONS = [
       var button = document.createElement('button');
       button.className = 'bmalSuitable';
       button.title = BUTTONS[ii].title;
+      button.toolbar = toolbar;
       // FIXME
       button.obj = BUTTONS[ii];
       button.innerHTML = "<i class='"+BUTTONS[ii].icon+"'></i>";
       button.onclick = function(e) { 
         e.preventDefault();
-        wrapValue(this.obj, toolbar.textArea);
+        this.toolbar.textArea.focus();   
+        if(this.obj.action) {
+          this.obj.action();
+        } else {          
+          wrapValue(this.obj, this.toolbar.textArea);
+        }
       };
       toolbar.buttonsWrapper.appendChild(button);
     }      
@@ -113,38 +129,88 @@ var BUTTONS = [
     toolbar.htmlDiv.style.display = 'none';
     toolbar.htmlDiv = toolbar.htmlDiv;
     toolbar.appendChild(toolbar.htmlDiv);
-    /* Events */
-    toolbar.textArea.oninput = function() {
-     toolbar.htmlDiv.innerHTML = BBCodeToHTML(this.value);   
-   };
-   toolbar.htmlDiv.oninput = function() {
-     toolbar.textArea.value = HTMLToBBCode(htmlDiv.innerHTML);   
-   }; 
-
-   /* Wraps textarea inside bbCodeToolbarWrapper */
-   toolbar.textArea.parentNode.insertBefore(toolbar, toolbar.textArea);
-   toolbar.appendChild(toolbar.textArea); 
- }
+    /* Wraps textarea inside bbCodeToolbarWrapper */
+    toolbar.textArea.parentNode.insertBefore(toolbar, toolbar.textArea);
+    toolbar.appendChild(toolbar.textArea); 
+  }
 })();
 
 function wrapValue(obj, textarea) {
-  var tag1 = '['+obj.tag+(obj.param ? '=' : '')+']';
-  var tag2 = '[/'+obj.tag+']';
   var len = textarea.value.length;
-  var start = textarea.selectionStart1 || textarea.selectionStart;
-  var end = textarea.selectionEnd1 || textarea.selectionEnd;
-  var scrollTop = textarea.scrollTop1 || textarea.scrollTop;
-  var scrollLeft = textarea.scrollLeft1 || textarea.scrollLeft;
-  var sel = textarea.value.substring(start, end);
-  var rep = tag1 + sel + tag2;
-  textarea.value = textarea.value.substring(0, start) + rep + textarea.value.substring(end, len);
-  textarea.scrollTop = scrollTop;
-  textarea.scrollLeft = scrollLeft;
-  if(obj.param) {
-    textarea.selectionStart = start + tag1.length;
-    textarea.selectionEnd = (start + tag1.length) - 1;
-  } else {    
-    textarea.selectionStart = start + tag1.length;
-    textarea.selectionEnd = tag1.length + end;
+  var start = textarea.selectionStart;
+  var end = textarea.selectionEnd;
+  var scrollTop = textarea.scrollTop;
+  var scrollLeft = textarea.scrollLeft;
+  var sel = textarea.value.substring(start, end);  
+  if(obj.paramText) {
+   /*
+    * If a value is needed, ask for it.
+    */
+    if(obj.paramAskOnly) {
+     /*
+      * The tag content needs a value
+      */
+      if(sel != '' && obj.paramExtract && sel.match(obj.paramExtract)) {
+     /*
+      * The selection will be used as content for it fits the requirements specified by paramExtract..
+      */
+      sel = sel.match(obj.paramExtract)[1];
+      end1 = sel.length;
+    } else if(sel == '' || obj.paramExtract && !sel.match(obj.paramExtract)) {
+     /*
+      * Either there is no selection or the selection doesn't fit the requirements specified by paramExtract.
+      */
+      do {
+     /*
+      * Asks for a value as long as a value is given and this one doesn't fit the requirements specified by paramExtract.
+      */
+      sel = window.prompt(obj.paramText);
+    } while(sel != null && !sel.match(obj.paramExtract || ''));
+    if(sel && obj.paramExtract) {
+     /*
+      * The given value fits the requirements specified by paramExtract.
+      * Replace the selection by the given value.
+      */
+      sel = sel.match(obj.paramExtract)[1];
+      end1 = sel.length;
+    } else if(!sel) {
+     /*
+      * The value hasn't been given
+      */
+      return;
+    }
   }
+} else {
+     /*
+      * The tag attribute needs a param
+      */
+      var param = '';
+      do {
+     /*
+      * Asks for a param as long as a param is given and this one doesn't fit the requirements specified by paramExtract.
+      */
+      param = window.prompt(obj.paramText);
+    }  while(param != null && !param.match(obj.paramExtract || ''));
+    if(param && obj.paramExtract) {
+     /*
+      * The given param fits the requirements specified by paramExtract.
+      * Replace the selection by the given param.
+      */
+      param = param.match(obj.paramExtract)[1];
+    } else if(!param) {
+     /*
+      * The param hasn't been given
+      */
+      return;
+    }
+  }
+} 
+var tag_start = '[' + obj.tag + (obj.paramText && !obj.paramAskOnly ? ('=' + param) : '') + ']';
+var tag_end = '[/'+ obj.tag +']';
+var rep = (tag_start + sel + tag_end);
+textarea.value = textarea.value.substring(0, start) + rep + textarea.value.substring(end, len);
+textarea.scrollTop = scrollTop;
+textarea.scrollLeft = scrollLeft;
+textarea.selectionStart = start + tag_start.length;
+textarea.selectionEnd = tag_start.length + (typeof end1 != 'undefined' ? end1 : end);
 }
