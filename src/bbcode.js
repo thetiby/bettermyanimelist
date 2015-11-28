@@ -1,5 +1,10 @@
 var BUTTONS = [
 {
+  icon: 'fa fa-eye',
+  title:'Preview',
+  action: previewBBCode
+},
+{
   icon: 'fa fa-bold',
   title:'Bold',
   tag:'b'
@@ -88,7 +93,6 @@ var BUTTONS = [
 }
 ];
 
-
 (function () {
   var textAreas = document.querySelectorAll("textarea");      
   for (var i = 0; i < textAreas.length; i++) {    
@@ -111,10 +115,10 @@ var BUTTONS = [
       button.onclick = function(e) { 
         e.preventDefault();
         this.toolbar.textArea.focus();   
-        if(this.obj.action) {
-          this.obj.action();
-        } else {          
+        if(this.obj.tag) {
           wrapValue(this.obj, this.toolbar.textArea);
+        } else {          
+          this.obj.action.call(this);
         }
       };
       toolbar.buttonsWrapper.appendChild(button);
@@ -125,7 +129,6 @@ var BUTTONS = [
     toolbar.htmlDiv.style.cssText = window.getComputedStyle(toolbar.textArea).cssText;
     toolbar.htmlDiv.style['-webkit-user-modify'] = '';
     toolbar.htmlDiv.className = 'html';
-    toolbar.htmlDiv.contentEditable = true;
     toolbar.htmlDiv.style.display = 'none';
     toolbar.htmlDiv = toolbar.htmlDiv;
     toolbar.appendChild(toolbar.htmlDiv);
@@ -213,4 +216,55 @@ textarea.scrollTop = scrollTop;
 textarea.scrollLeft = scrollLeft;
 textarea.selectionStart = start + tag_start.length;
 textarea.selectionEnd = tag_start.length + (typeof end1 != 'undefined' ? end1 : end);
+}
+
+function previewBBCode() {
+  var isPreviewing = this.toolbar.htmlDiv.style.display == 'block';
+  if(isPreviewing) {
+    this.toolbar.htmlDiv.textContent = '';
+    this.toolbar.textArea.style.display = 'block';
+    this.toolbar.htmlDiv.style.display = 'none';
+    this.classList.remove('active');
+    switchButtonsState(this.toolbar, false);
+  } else {    
+    this.toolbar.htmlDiv.textContent = bbCodeToHTML(this.toolbar.textArea.value);
+    this.toolbar.htmlDiv.style.display = 'block';
+    this.toolbar.textArea.style.display = 'none';
+    this.classList.add('active');
+    switchButtonsState(this.toolbar, true);
+  }
+}
+
+function switchButtonsState(toolbar, disable) {
+  for(var i = 1; i < toolbar.buttonsWrapper.childNodes.length;i++) {
+    toolbar.buttonsWrapper.childNodes[i].disabled = disable;
+  }
+}
+
+function bbCodeToHTML(str) { // [b]dfskjdfsjdkhdsqjkhdsq[/b]
+  return str.replace(/\[(?!\/)(.*?)\](.*?)\[\/.*?\]/mg, function(match, p1, p2, offset, string) {
+    console.log('match: '+ match);
+    console.log('p1: '+ p1);
+    console.log('p2: '+ p2);
+    console.log('offset: '+ offset);
+    console.log('string: '+ string);
+    var BBCODE_HTML_EQUIVALENT = {
+      'b': '<b>'+p2+'</b>',
+      'i': '<i>'+p2+'</i>',
+      'u': '<u>'+p2+'</u>',
+      's': '<s>'+p2+'</s>',
+      'color': '<color>'+p2+'</color>',
+      'size': '<size>'+p2+'</size>',
+      'center': '<center>'+p2+'</center>',
+      'right': '<right>'+p2+'</right>',
+      'url': '<a href=></a>',
+      'image': '<img src=>',
+      'list=1': '<ol>' + p2.replace(/blabla/g,'<li>$1</li>') + '</ol>',
+      'list': '<ul>' + p2.replace(/blabla/g,'<li>$1</li>') + '</ul>',
+      'quote': '<quote>'+p2+'</quote>',
+      'spoiler': '<spoiler>'+p2+'</spoiler>',
+      'yt': '<yt>'+p2+'</yt>',
+    };
+    return p1 in BBCODE_HTML_EQUIVALENT ? BBCODE_HTML_EQUIVALENT[p1] : match; 
+  });
 }
