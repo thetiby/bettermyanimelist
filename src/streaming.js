@@ -55,7 +55,14 @@ function initComponents() {
     this.video.onblur = function () {
         that.isFocused = false;
     };
-    this.video.onmousemove = that.switchControls;
+    this.video.onmousemove = function(e) {
+        if(e.x == this.lastX && e.y == this.lastY) {
+            return;
+        }
+        this.lastX = e.x;
+        this.lastY = e.y;
+        that.switchControls();
+    };
     this.video.onclick = that.switchPlaybackState;
     this.video.onloadstart = function () {
         focusWithoutScrolling(that.video);
