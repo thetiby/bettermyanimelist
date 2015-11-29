@@ -129,7 +129,7 @@ function MediaPlayer() {
         select.options[isNext ? (select.selectedIndex + 1) : (select.selectedIndex - 1)].selected = true;
         select.onchange();
     };
-    this.injectMedia = function (src) {
+    this.injectMedia = function (src, callback) {
            /*
             * Sometimes the provided src leads to a 302 which prevents the video player 
             * from working properly.
@@ -142,8 +142,16 @@ function MediaPlayer() {
                     var xmlhttp = new XMLHttpRequest();
                     xmlhttp.onreadystatechange = function () {
                         if (xmlhttp.readyState == 3) {
-                            responseURL = xmlhttp.responseURL;
-                            xmlhttp.abort();
+                            if(xmlhttp.status == 200) {
+                                responseURL = xmlhttp.responseURL;
+                                xmlhttp.abort();
+                            } else {
+                                if(callback) {                                    
+                                    callback();
+                                } else {
+                                    that.setState(STATE.ERROR);
+                                }
+                            }
                         }
                     };
                     xmlhttp.onabort = function () {
@@ -249,25 +257,25 @@ function MediaPlayer() {
         initComponents.call(this);
         /*
          * Error display
-        */
-        this.error_display = document.createElement("div");
-        this.error_display.className = "error_screen";
-        this.mediaWrapper.appendChild(this.error_display);
+         */
+         this.error_display = document.createElement("div");
+         this.error_display.className = "error_screen";
+         this.mediaWrapper.appendChild(this.error_display);
         /*
          * Loading display
-        */
-        this.loading_display = document.createElement("div");
-        this.loading_display.className = "loading_screen";
-        this.mediaWrapper.appendChild(this.loading_display);
-        this.osd = document.createElement("div");
-        this.osd.className = "osd animated fadeOut";
-        this.mediaWrapper.appendChild(this.osd);
-        this.div.appendChild(this.mediaWrapper);
-        initEvents.call(this);
-        initShorcuts.call(this);
-    }
+         */
+         this.loading_display = document.createElement("div");
+         this.loading_display.className = "loading_screen";
+         this.mediaWrapper.appendChild(this.loading_display);
+         this.osd = document.createElement("div");
+         this.osd.className = "osd animated fadeOut";
+         this.mediaWrapper.appendChild(this.osd);
+         this.div.appendChild(this.mediaWrapper);
+         initEvents.call(this);
+         initShorcuts.call(this);
+     }
 
-    function initEvents() {
+     function initEvents() {
         var that = this;
         this.select_source.onchange = function () {
             that.source = this.options[this.selectedIndex].source;
