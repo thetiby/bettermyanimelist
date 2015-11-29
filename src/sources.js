@@ -179,49 +179,45 @@ var SOURCES = {
                         xmlhttp.onreadystatechange = function () {
                             if (xmlhttp.readyState == 4) {
                                 if (xmlhttp.status == 200) {
+                                    var links = xmlhttp.responseXML.querySelectorAll('*[link-watch]');
                                     if (mediaPlayer.select.options.length == 0) {
                                         mediaPlayer.select.innerHTML = xmlhttp.responseXML.querySelector("#selectEpisode").innerHTML;
                                     }
-                                    if (xmlhttp.responseXML.querySelector("#selectQuality")) {
-                                        mediaPlayer.select1.innerHTML = xmlhttp.responseXML.querySelector("#selectQuality").innerHTML;
-                                        mediaPlayer.injectMedia();
+                                    var qualities = xmlhttp.responseXML.querySelector("#selectQuality");
+                                    if (qualities) {
+                                        mediaPlayer.select1.innerHTML = qualities.innerHTML;
+                                        mediaPlayer.injectMedia(mediaPlayer.select1.value, testAlternativeLinks);
                                     } else {
-                                        var iframes = xmlhttp.responseXML.querySelectorAll('.anime_video_body_watch_items .ads_iframe');
-                                        var i = 0;
-                                        execute(i);
-                                        function execute(i) {
-                                            if (!iframes[i].hasAttribute("link-watch")) {
-                                                return;
-                                            }
-                                            var link = "http://www.mp4upload.com/embed-" + iframes[i].getAttribute('link-watch') + ".html";
-                                            var xmlhttp1 = new XMLHttpRequest();
-                                            xmlhttp1.onreadystatechange = function () {
-                                                if (xmlhttp1.readyState == 4) {
-                                                    if (xmlhttp1.status == 200) {
-                                                        var script = xmlhttp1.responseXML.querySelector('#player_code script');
-                                                        var src = script.innerHTML.match(/(http:\/\/.*?\/video\.mp4)/);
-                                                        mediaPlayer.injectMedia(src[1]);
-                                                    } else {
-                                                        i++;
-                                                        execute(i);
-                                                    }
+                                        testAlternativeLinks(0);
+                                    } 
+                                    function testAlternativeLinks(index) {
+                                        if(!links[index] || index > links.length) {                                            
+                                            mediaPlayer.setState(STATE.ERROR);
+                                        } else {
+                                          var id = links[index].getAttribute('link-watch');                                        
+                                          var xmlhttp = new XMLHttpRequest();
+                                          xmlhttp.onreadystatechange = function() {
+                                            if(xmlhttp.readyState == 4) {
+                                                if(xmlhttp.status == 200) {
+                                                    var file = xmlhttp.responseText.match(/'file':\s?'(.*?)'/i)[1];                                                    
+                                                    mediaPlayer.injectMedia(file, testAlternativeLinks.bind(index + 1));
                                                 }
-                                            };
-                                            xmlhttp1.open("GET", link, true);
-                                            xmlhttp1.responseType = "document";
-                                            xmlhttp1.send();
-                                        }
-                                    }
-                                }  else {
-                                    mediaPlayer.setState(STATE.ERROR);
+                                            }
+                                        };
+                                        xmlhttp.open('GET','http://www.mp4upload.com/embed-' + id + '.html',true);
+                                        xmlhttp.send();
+                                    }                                      
                                 }
+                            }  else {
+                                mediaPlayer.setState(STATE.ERROR);
                             }
-                        };
-                        xmlhttp.open("GET", this.protocol + this.domain + "/" + (uri || mediaPlayer.select.value), true);
-                        xmlhttp.responseType = "document";
-                        xmlhttp.send();
-                    }
+                        }
+                    };
+                    xmlhttp.open("GET", this.protocol + this.domain + "/" + (uri || mediaPlayer.select.value), true);
+                    xmlhttp.responseType = "document";
+                    xmlhttp.send();
                 }
+            }
             ],
             FR: [
             ],
@@ -230,12 +226,12 @@ var SOURCES = {
         DUB: {
             EN: [
             {
-               id: 'ad98592b-9183-4e3a-ac5f-9516c9db6474',
-               domain: 'kissanime.to',
-               protocol: 'https://',
-               matchers: [/^https?:\/\/(www\.)?kissanime\.to\/(M\/)?anime\/.*-dub$/i],
-               urlTitleExtractors: [/anime\/([^\/]+)/i],
-               load: function(title, callback) {
+             id: 'ad98592b-9183-4e3a-ac5f-9516c9db6474',
+             domain: 'kissanime.to',
+             protocol: 'https://',
+             matchers: [/^https?:\/\/(www\.)?kissanime\.to\/(M\/)?anime\/.*-dub$/i],
+             urlTitleExtractors: [/anime\/([^\/]+)/i],
+             load: function(title, callback) {
                 SOURCES[0].SUB.EN[0].load(title, callback, true);
             },
             load1: function() {
