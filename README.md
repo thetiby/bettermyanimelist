@@ -5,7 +5,7 @@
 
 With **BetterMyAnimeList** you can, for example, watch any anime and read any manga through MyAnimeList.net using the streaming and watching tabs provided on either the anime or manga page.
 
-### Autocomplete as you type in the search bar!
+### Autocomplete as you type in the search bar
 
 Whether you are looking for an anime or a manga **BetterMyAnimeList** will give you beautiful and resourceful previews of all the returned results as you type in the search bar. The entries are rendered below the search bar in an elegant and suitable way.
 
@@ -26,7 +26,7 @@ You will no longer have to step out of [MyAnimeList.net]() to watch anime or rea
 
 ##### Streaming
 
-The streaming feature is different from the others because:
+Why you should use BetterMyAnimeList's streaming feature:
 
 * It is much more faster
 * It is Ad-free
@@ -43,7 +43,7 @@ What the streaming feature allows you to do:
 
 ##### Reading
 
-The reading feature is different from the others because:
+Why you should use BetterMyAnimeList's reading feature:
 
 * It is much more faster
 * It is Ad-free
@@ -124,11 +124,9 @@ Me aka [romain2](http://myanimelist.net/profile/Romain2) aka [rebesle](http://gi
 
 ### Contact
 
-If you have any problems, found any bugs or have suggestion to make, you may contact through various ways:
-
-* Using the forums [bettermyanimelist.net/forums](http://goo.gl/F7s9pD)
-* Using the irc [irc://irc.freenode.net/bettermyanimelist](https://kiwiirc.com/client/irc%3A%2F%2Firc.freenode.net%2Fbettermyanimelist) 
-* Using the Facebook page [facebook/bettermyanimelist](http://goo.gl/2yez4m) 
+* Forums: [bettermyanimelist.net/forums](http://goo.gl/F7s9pD)
+* IRC: [irc://irc.freenode.net/bettermyanimelist](https://kiwiirc.com/client/irc%3A%2F%2Firc.freenode.net%2Fbettermyanimelist) 
+* Facebook page: [facebook/bettermyanimelist](http://goo.gl/2yez4m) 
 
 
 ### Contributors
