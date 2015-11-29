@@ -2,7 +2,7 @@ var BUTTONS = [
 {
   icon: 'fa fa-eye',
   title:'Preview',
-  action: previewBBCode
+  action: onPreviewClick
 },
 {
   icon: 'fa fa-bold',
@@ -66,12 +66,16 @@ var BUTTONS = [
 {
   icon: 'fa fa-list-ol',
   title:'Unordered list',
-  tag:'list=1'
+  tag:'list=1',
+  filler:'\n[*]\n[*]\n[*]\n',
+  cursorPos: 4
 },
 {
   icon: 'fa fa-list',
   title:'List',
-  tag:'list'
+  tag:'list',
+  filler:'\n[*]\n[*]\n[*]\n',
+  cursorPos: 4
 },
 {
   icon: 'fa fa-quote-left',
@@ -210,16 +214,16 @@ function wrapValue(obj, textarea) {
 } 
 var tag_start = '[' + obj.tag + (obj.paramText && !obj.paramAskOnly ? ('=' + param) : '') + ']';
 var tag_end = '[/'+ obj.tag +']';
-var rep = (tag_start + sel + tag_end);
+var rep = (tag_start + (obj.filler || sel) + tag_end);
 textarea.value = textarea.value.substring(0, start) + rep + textarea.value.substring(end, len);
 textarea.scrollTop = scrollTop;
 textarea.scrollLeft = scrollLeft;
-textarea.selectionStart = start + tag_start.length;
-textarea.selectionEnd = tag_start.length + (typeof end1 != 'undefined' ? end1 : end);
+textarea.selectionStart = start + tag_start.length + (obj.cursorPos || 0);
+textarea.selectionEnd = typeof obj.cursorPos != 'undefined' ? textarea.selectionStart : (tag_start.length + (typeof end1 != 'undefined' ? end1 : end));
 }
 
-function previewBBCode() {
-  var isPreviewing = this.toolbar.htmlDiv.style.display == 'block';
+function onPreviewClick() {
+  var isPreviewing = this.classList.contains('active');
   if(isPreviewing) {
     this.toolbar.htmlDiv.textContent = '';
     this.toolbar.textArea.style.display = 'block';
@@ -227,11 +231,14 @@ function previewBBCode() {
     this.classList.remove('active');
     switchButtonsState(this.toolbar, false);
   } else {    
-    this.toolbar.htmlDiv.textContent = bbCodeToHTML(this.toolbar.textArea.value);
-    this.toolbar.htmlDiv.style.display = 'block';
-    this.toolbar.textArea.style.display = 'none';
     this.classList.add('active');
-    switchButtonsState(this.toolbar, true);
+    var toolbar = this.toolbar;
+    messagePreview(this.toolbar.textArea.value, function(html) {      
+      toolbar.htmlDiv.innerHTML = html;
+      toolbar.htmlDiv.style.display = 'block';
+      toolbar.textArea.style.display = 'none';
+      switchButtonsState(toolbar, true);
+    });
   }
 }
 
@@ -241,30 +248,3 @@ function switchButtonsState(toolbar, disable) {
   }
 }
 
-function bbCodeToHTML(str) { // [b]dfskjdfsjdkhdsqjkhdsq[/b]
-  return str.replace(/\[(?!\/)(.*?)\](.*?)\[\/.*?\]/mg, function(match, p1, p2, offset, string) {
-    console.log('match: '+ match);
-    console.log('p1: '+ p1);
-    console.log('p2: '+ p2);
-    console.log('offset: '+ offset);
-    console.log('string: '+ string);
-    var BBCODE_HTML_EQUIVALENT = {
-      'b': '<b>'+p2+'</b>',
-      'i': '<i>'+p2+'</i>',
-      'u': '<u>'+p2+'</u>',
-      's': '<s>'+p2+'</s>',
-      'color': '<color>'+p2+'</color>',
-      'size': '<size>'+p2+'</size>',
-      'center': '<center>'+p2+'</center>',
-      'right': '<right>'+p2+'</right>',
-      'url': '<a href=></a>',
-      'image': '<img src=>',
-      'list=1': '<ol>' + p2.replace(/blabla/g,'<li>$1</li>') + '</ol>',
-      'list': '<ul>' + p2.replace(/blabla/g,'<li>$1</li>') + '</ul>',
-      'quote': '<quote>'+p2+'</quote>',
-      'spoiler': '<spoiler>'+p2+'</spoiler>',
-      'yt': '<yt>'+p2+'</yt>',
-    };
-    return p1 in BBCODE_HTML_EQUIVALENT ? BBCODE_HTML_EQUIVALENT[p1] : match; 
-  });
-}
