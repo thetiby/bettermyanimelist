@@ -229,6 +229,7 @@ function onPreviewClick() {
     this.toolbar.textArea.style.display = 'block';
     this.toolbar.htmlDiv.style.display = 'none';
     this.classList.remove('active');
+    this.toolbar.textArea.focus();
     switchButtonsState(this.toolbar, false);
   } else {    
     this.classList.add('active');
