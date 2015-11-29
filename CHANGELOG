@@ -137,7 +137,7 @@ v2.2
    Source:
      * Adds mangahere.co
      * Adds es.mangahere.co
- BBCode Toolbar:
+ BBCode toolbar:
    * Increases the size of the BBCode buttons to make them easier to click on
    * Fixes minor bugs
 
@@ -209,3 +209,12 @@ v3.3.7
    * Improved search results
  Streaming/Reading:
    * Fixed various bugs   
+v3.3.8
+=======
+ Streaming:
+   * Fixed 'stuck at loading screen' issue
+   * Fixed 'blinking cursor from being hidden' issue
+ BBCode toolbar:  
+   * Fixed 'BBCode toolbar controls are all connected to one textarea' issue
+   * Fixed caret issue
+   * Added a BBCode preview feature
