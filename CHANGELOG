@@ -209,3 +209,13 @@ v3.3.7
    * Improved search results
  Streaming/Reading:
    * Fixed various bugs   
+   
+v3.3.8
+=======
+ Streaming:
+   * Fixed 'stuck at loading screen' issue
+   * Fixed 'blinking cursor from being hidden' issue
+ BBCode toolbar:  
+   * Fixed 'BBCode toolbar controls are all connected to one textarea' issue
+   * Fixed caret issue
+   * Added a BBCode preview feature
