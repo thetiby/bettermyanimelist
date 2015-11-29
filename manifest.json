@@ -16,10 +16,10 @@
       ],
       "js": [
         "resources/lib/analytics.min.js",
+        "src/site.js",
         "src/storage.js",
         "src/constants.js",
         "src/tools.js",
-        "src/user.js",
         "src/bbcode.js"
       ],
       "matches": [
