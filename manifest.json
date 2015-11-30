@@ -17,7 +17,7 @@
       "js": [
         "resources/lib/analytics.min.js",
         "src/site.js",
-        "src/storage.js",
+        "src/storage.js", 
         "src/constants.js",
         "src/tools.js",
         "src/bbcode.js"
@@ -85,7 +85,7 @@
       ]
     }
   ],
-  "description": "Watch anime and read manga from MyAnimeList.net",
+  "description": "Watch anime and read manga through MyAnimeList.net",
   "icons": {
     "16": "resources/images/icon32.png",
     "48": "resources/images/icon128.png",
@@ -113,5 +113,10 @@
   "version": "0.2.3.9",
   "web_accessible_resources": [
     "resources/**/*"
-  ]
+  ],
+ "applications": {
+    "gecko": {
+      "id": "bettermyanimelist@bettermyanimelist.net"
+    }
+  }
 }
