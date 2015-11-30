@@ -143,4 +143,4 @@ Me aka [romain2](http://myanimelist.net/profile/Romain2) aka [rebesle](http://gi
 
 ### License
 
-MIT License. © 2013 Romain Lebesle
+MIT License. © 2015 Romain Lebesle
