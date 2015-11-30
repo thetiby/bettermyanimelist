@@ -1,7 +1,5 @@
 /* global chrome */
 
-
-
 chrome.storage.local.get('retroCompatibility', function (items) {
     var retroCompatibility = items.retroCompatibility || {currentVersion: '0.0.0'};
     if(retroCompatibility.currentVersion != chrome.runtime.getManifest().version) {
