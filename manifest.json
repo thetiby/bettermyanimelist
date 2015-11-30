@@ -110,7 +110,7 @@
     "<all_urls>",
     "unlimitedStorage"
   ],
-  "version": "0.2.3.8",
+  "version": "0.2.3.7",
   "web_accessible_resources": [
     "resources/**/*"
   ]
