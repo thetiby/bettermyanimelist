@@ -56,7 +56,7 @@ Me aka [romain2](http://myanimelist.net/profile/Romain2) aka [rebesle](http://gi
 * Facebook: [facebook/bettermyanimelist](http://facebook/bettermyanimelist) 
 
 
-### Contributors
+### Credits
 
 ##### Development
 
