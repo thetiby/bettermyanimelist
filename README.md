@@ -26,7 +26,6 @@
 
 Changelog is available [here](https://github.com/rebesle/bettermyanimelist/blob/master/CHANGELOG) or at [bettermyanimelist.net/forums](bettermyanimelist.net/forums) 
 
-
 ### F.A.Q  
 
 ##### How to Install it ?
