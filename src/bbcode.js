@@ -64,16 +64,17 @@ var BUTTONS = [
   paramExtract: /(https?:\/\/(www\.)?([^\.\s]{1,255}\.?){8,})/i
 },
 {
-  icon: 'fa fa-list-ol',
+  icon: 'fa fa-list',
   title:'Unordered list',
-  tag:'list=1',
+  tag:'list',
   filler:'\n[*]\n[*]\n[*]\n',
   cursorPos: 4
 },
 {
-  icon: 'fa fa-list',
-  title:'List',
+  icon: 'fa fa-list-ol',
+  title:'Ordered list',
   tag:'list',
+  param: 1,
   filler:'\n[*]\n[*]\n[*]\n',
   cursorPos: 4
 },
@@ -212,7 +213,7 @@ function wrapValue(obj, textarea) {
     }
   }
 } 
-var tag_start = '[' + obj.tag + (obj.paramText && !obj.paramAskOnly ? ('=' + param) : '') + ']';
+var tag_start = '[' + obj.tag + (obj.paramText && !obj.paramAskOnly || obj.param ? ('=' + (obj.param || param)) : '') + ']';
 var tag_end = '[/'+ obj.tag +']';
 var rep = (tag_start + (obj.filler || sel) + tag_end);
 textarea.value = textarea.value.substring(0, start) + rep + textarea.value.substring(end, len);
