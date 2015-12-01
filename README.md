@@ -52,7 +52,7 @@ Me aka [romain2](http://myanimelist.net/profile/Romain2) aka [rebesle](http://gi
 ### Contact
 
 * Forums: [bettermyanimelist.net/forums](http://bettermyanimelist.net/forums)
-* IRC: [irc://irc.freenode.net/bettermyanimelist](irc://irc.freenode.net/bettermyanimelist) 
+* IRC: [irc://irc.rizon.net/bettermyanimelist](irc://irc.rizon.net/bettermyanimelist) 
 * Facebook: [facebook/bettermyanimelist](http://facebook/bettermyanimelist) 
 
 
