@@ -1,114 +1,114 @@
-v1.0
+v0.1.0
 =======
  General:
    * Adds an autocomplete system for the main search bar
 
-v1.1
+v0.1.1
 =======
  Autocomplete:
-   * Speed greatly improved
+   * Speed greatly improv0.ed
 
-v1.2
+v0.1.2
 =======
  General:
    * Adds the ability to hide/ignore forums
 
-v1.3
+v0.1.3
 =======
  General:
    * Adds the ability to export other people's list
 
-v1.4
+v0.1.4
 =======
  General:
    * [BETA] Adds a streaming system (see the new 'watching' button)
 
-v1.4.2
+v0.1.4.2
 =======
  General:
    * Change the streaming button name from "watching" to "streaming" (disambiguation)
 
-v1.4.3
+v0.1.4.3
 =======
  General:
-   * Fixes various bugs
+   * Fixes v0.arious bugs
 
-v1.4.4
+v0.1.4.4
 =======
  List:
    * Adds the "watching" state for the export list feature
    * Adds the ability to clean the whole anime/manga list (see on your anime list page)
 
-v1.5
+v0.1.5
 =======
  Streaming:
-   * Fixes various bugs
+   * Fixes v0.arious bugs
 
-v1.5.1
+v0.1.5.1
 =======
  General:
    * New icon
  Streaming:
-   * Fixes various bugs
+   * Fixes v0.arious bugs
    * Adds a new select box allowing to choose a source (In-Progress)
 
-v1.5.2
+v0.1.5.2
 =======
  General:
-   * Removes the ability of hiding a forum
-   * Fixes various bugs
+   * Remov0.es the ability of hiding a forum
+   * Fixes v0.arious bugs
 
-v1.5.3
+v0.1.5.3
 =======
  List:
    * Adds a feature to instantly search by typing on the list
    Manga:
-     * Fixes an important bug preventing the export
+     * Fixes an important bug prev0.enting the export
  Streaming: 
    * Sources using Clouflare no longer need to open a new window to bypass it
 
-v1.5.4
+v0.1.5.4
 =======
  General:
-   * Fixes various bugs
+   * Fixes v0.arious bugs
  Streaming:  
-   * Stability and speed improved
+   * Stability and speed improv0.ed
 
-v1.5.5
+v0.1.5.5
 =======
  General: 
    * A new icon is displayed inside the omnibox if BetterMyAnimeList is enabled
 
-v1.5.6
+v0.1.5.6
 =======
  Autocomplete: 
    * The special characters are replaced by a wildcard which makes the searches more efficient
  List:
    * A new confirmation popup shows up when you try to clear the list
  Streaming:
-   * Adds shortcuts to the video player
+   * Adds shortcuts to the v0.ideo player
    Source:
-      * [Beta] Adds various sources
+      * [Beta] Adds v0.arious sources
 
-v1.5.7
+v0.1.5.7
 =======
  General:
    * [Beta] Adds a reading system (see reading tab on a manga page)
  Streaming: 
    * Layout update
 
-v1.5.7.1
+v0.1.5.7.1
 =======
  General:
-   * Fixes various bugs
+   * Fixes v0.arious bugs
 
-v1.5.7.2
+v0.1.5.7.2
 =======
  General:
-   * Fixes various bugs
+   * Fixes v0.arious bugs
    * A new popup shows up when you use the export list system
 
-v2.0
+v0.2.0
 =======
  Streaming/Reading:  
    * Layout update
@@ -118,19 +118,19 @@ v2.0
      * Adds watchhentaistream.com
  General:
    * Adds a BBCode system
-   * Fixes various bugs
+   * Fixes v0.arious bugs
 
-v2.1 
+v0.2.1 
  General:
-   * Fixes various bugs
+   * Fixes v0.arious bugs
 
-v2.2
+v0.2.2
 =======
  Streaming/Reading:    
    * Layout update
  Streaming:
    Source:
-     * Removes watchhentaistream.com 
+     * Remov0.es watchhentaistream.com 
      * Adds hentaimama.com
      * Adds animegaki.com
  Reading:
@@ -141,76 +141,76 @@ v2.2
    * Increases the size of the BBCode buttons to make them easier to click on
    * Fixes minor bugs
 
-v2.2.1
+v0.2.2.1
 =======
  Streaming:
    * Fixes the controls bar
-   * The playback quality is now saved 
+   * The playback quality is now sav0.ed 
    * Fixes minor bugs
 
-v2.2.4
+v0.2.2.4
 =======
  Streaming:
-   * Playback is now saved (both the episode and the current position in the video) and automatically resumed
+   * Playback is now sav0.ed (both the episode and the current position in the v0.ideo) and automatically resumed
  Reading:
-   * Chapters as well as the last read page is now saved and automatically resumed
+   * Chapters as well as the last read page is now sav0.ed and automatically resumed
 
-v2.2.5
+v0.2.2.5
 =======
  General:
-   * Fixes various bugs
+   * Fixes v0.arious bugs
 
-v2.2.6
+v0.2.2.6
 =======
  Autocomplete:
    * Redirects to the first result if it is the only one
 
-v2.2.7
+v0.2.2.7
 =======
  General:
-   * Fixes various bugs
+   * Fixes v0.arious bugs
 
-v2.2.8
+v0.2.2.8
 =======
  General:
-   * Fixes various bugs
+   * Fixes v0.arious bugs
 
-v2.2.9
+v0.2.2.9
 =======
  General:
-   * Fixes various bugs
+   * Fixes v0.arious bugs
 
-v3.0.0
+v0.3.0.0
 =======
  General:
-   * Removes the ability to export other people's list
-   * Removes the ability to clear the list
+   * Remov0.es the ability to export other people's list
+   * Remov0.es the ability to clear the list
 
-v3.3.5
+v0.3.3.5
 =======
  BBCode toolbar: 
-   * Fixes various bugs
+   * Fixes v0.arious bugs
    * Changes the layout
  Source:
    * Sorts sources inside the select source
  Streaming/Reading:
-   * History has been removed and will be reintroduced in the remade version 
+   * History has been remov0.ed and will be reintroduced in the remade v0.ersion 
 
-v3.3.6
+v0.3.3.6
 =======
  General:
-   * Renames the project on the Chrome Webstore Page from BetterMyAnimeList (dev) to BetterMyAnimeList    
+   * Renames the project on the Chrome Webstore Page from BetterMyAnimeList (dev0.) to BetterMyAnimeList    
  Autocomplete:
    * Added the ability to watch an anime/manga by clicking the thumbnail
 
-v3.3.7
+v0.3.3.7
 =======
  Autocomplete:
-   * Improved search results
+   * Improv0.ed search results
  Streaming/Reading:
-   * Fixed various bugs   
+   * Fixed v0.arious bugs   
    
-v3.3.8
+v0.3.3.8
 =======
  Streaming:
    * Fixed 'stuck at loading screen' issue
@@ -218,4 +218,8 @@ v3.3.8
  BBCode toolbar:  
    * Fixed 'BBCode toolbar controls are all connected to one textarea' issue
    * Fixed caret issue
-   * Added a BBCode preview feature
+   * Added a BBCode prev0.iew feature
+v0.3.3.9
+=======
+ BBCode toolbar:  
+   * Fixed ordered list
