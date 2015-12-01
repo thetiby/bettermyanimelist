@@ -51,9 +51,9 @@ Me aka [romain2](http://myanimelist.net/profile/Romain2) aka [rebesle](http://gi
 
 ### Contact
 
-* Forums: [bettermyanimelist.net/forums](http://goo.gl/F7s9pD)
-* IRC: [irc://irc.freenode.net/bettermyanimelist](https://kiwiirc.com/client/irc%3A%2F%2Firc.freenode.net%2Fbettermyanimelist) 
-* Facebook: [facebook/bettermyanimelist](http://goo.gl/2yez4m) 
+* Forums: [bettermyanimelist.net/forums](http://bettermyanimelist.net/forums)
+* IRC: [irc://irc.freenode.net/bettermyanimelist](irc://irc.freenode.net/bettermyanimelist) 
+* Facebook: [facebook/bettermyanimelist](http://facebook/bettermyanimelist) 
 
 
 ### Contributors
