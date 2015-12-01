@@ -3,9 +3,6 @@
 
 **BetterMyAnimeList** is a browser extension built to add features which [myanimelist.net]() seems to be lacking. 
 
-### Video
-[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/S8GG3xW70ss/0.jpg)](http://www.youtube.com/watch?v=S8GG3xW70ss)
-
 ### Features
 
 ##### Current features
