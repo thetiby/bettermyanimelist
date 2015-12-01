@@ -33,7 +33,6 @@
     max-width:12%;
     text-align:right;
 }
-
 #mediaPlayer .mediaWrapper {
     margin-top:5px;
     position: relative;    
@@ -73,7 +72,6 @@
     background-size: 100%;
     background-position: center;
 }
-
 #mediaPlayer .mediaWrapper .osd {
     display:none;
     position: absolute;
